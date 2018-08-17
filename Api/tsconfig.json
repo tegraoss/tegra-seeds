@@ -1,0 +1,28 @@
+{
+    "compilerOptions": {
+        "experimentalDecorators": true,
+        "allowJs": true,
+        "target": "es2017",
+        "module": "commonjs",
+        "moduleResolution": "node",
+        "emitDecoratorMetadata": true,
+        "removeComments": false,
+        "noImplicitAny": false,
+        "noEmitOnError": true,
+        "outDir": "dist",
+        "rootDir": "src",
+        "importHelpers": true,
+        "alwaysStrict": true,
+        "inlineSourceMap": true,
+        "inlineSources": true,
+        "noUnusedLocals": true,
+    },
+    "compileOnSave": false,
+    "files": [
+        "src/**/*.ts"
+    ],
+    "exclude": [
+        "node_modules",
+        "bower_components"
+    ]
+}

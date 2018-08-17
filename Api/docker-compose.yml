@@ -1,0 +1,37 @@
+version: '2'
+services:
+
+  web:
+    container_name: tegra-seed-api
+    tty: true
+    build: docker/dev
+    environment:
+      - NODE_ENV=development
+      - NODE_PORT=3000
+      - DB_HOST=database
+      - DB_PORT=5432
+      - DB_USER=docker
+      - DB_PASSWORD=1234
+      - DB_DATABASE=tegraseed
+    env_file:
+      - .env
+    ports:
+      - "3000:3000"
+      - "5859:5859"
+    volumes:
+      - .:/src
+    links:
+      - database
+
+  database:
+    container_name: tegra-seed-db
+    image: postgres:10.3-alpine
+    environment:
+      - POSTGRES_DB=tegraseed
+      - POSTGRES_USER=docker
+      - POSTGRES_PASSWORD=1234
+    volumes:
+      - ./.data:/var/lib/postgresql/data
+    command: -p 5432
+    ports:
+      - "5432:5432"
