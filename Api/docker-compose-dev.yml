@@ -1,8 +1,10 @@
 version: '2'
 services:
-  api:
-    image: tegra/internal:tegra-seed-api
+
+  web:
+    container_name: tegra-seed-api
     tty: true
+    build: docker/dev
     environment:
       - NODE_ENV=development
       - NODE_PORT=3000
