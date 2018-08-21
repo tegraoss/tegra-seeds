@@ -8,7 +8,12 @@ Este é um projeto em Node que roda através do Docker.
 - Auth com JWT
 - Postgres
 
-## Como rodar o projeto
+## Como acessar o projeto
+
+Ele está em uma URL pública para testes.
+https://tegraseed.dev.tegra.me
+
+## Como rodar o projeto, caso necessário
 
 Para rodar, acesse a pasta deste projeto pela sua linha de comando e rode
 

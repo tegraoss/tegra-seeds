@@ -9,6 +9,7 @@ import { authMiddleware } from "./middlewares/auth";
 import * as errors from "./middlewares/errors";
 import { loginRouter } from "./router/login-router";
 import { userRouter } from "./router/user-router";
+import * as cors from "cors";
 //import * as swaggerUi from "swagger-ui-express";
 //import * as swaggerDoc from "./app/swagger/swagger.json";
 //import { authRouter } from "./app/controllers/authController";
@@ -20,6 +21,8 @@ db.connectAndMigrate();
 
 // INITIALIZE SERVER
 const app = express();
+
+app.use(cors());
 
 // DEFAULT MIDDLEWARES
 app.use(bodyParser.json({ limit: "5mb" }));
