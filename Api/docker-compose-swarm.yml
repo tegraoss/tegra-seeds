@@ -1,0 +1,72 @@
+version: '3.6'
+services:
+
+  picking-api:
+    image: tegra/internal:tegra-seed-api
+    environment:
+      - NODE_ENV=development
+      - NODE_PORT=3000
+      - DB_HOST=postgres
+      - DB_PORT=5432
+      - DB_USER=tegraseed
+      - DB_PASSWORD=tegraseed
+      - DB_DATABASE=tegraseed
+    ports:
+      - 3000
+    depends_on:
+      - postgres
+    #entrypoint: ./wait-for-it.sh postgres:5432 -t 30 -- java -Duser.timezone=America/Sao_Paulo -Djava.security.egd=file:/dev/./urandom -Dspring.profiles.active=docker -jar api.jar
+    networks:
+      - tegraseed
+      - traefik-net
+    deploy:
+      mode: replicated
+      replicas: 1
+      resources:
+        limits:
+          memory: 200M
+        reservations:
+          memory: 200M
+      restart_policy:
+        condition: on-failure
+        delay: 10s
+        max_attempts: 10
+        window: 30s
+      update_config:
+        parallelism: 1
+        delay: 10s
+        order: start-first
+      labels:
+        - "traefik.port=3000"
+        - "traefik.frontend.rule=Host:tegraseed.dev.tegra.me;"
+        - "traefik.docker.network=traefik-net"
+
+
+  postgres:
+    image: postgres:9.6.6-alpine
+    environment:
+      - POSTGRES_PASSWORD=tegraseed
+      - POSTGRES_USER=tegraseed
+      - POSTGRES_DB=tegraseed
+    volumes:
+      - "postgres_data:/var/lib/postgresql/data"
+    ports:
+      - "5432"
+    networks:
+      - tegraseed
+    deploy:
+      placement:
+        constraints: [node.role == manager]
+      restart_policy:
+        condition: on-failure
+        delay: 5s
+        max_attempts: 5
+        window: 20s
+
+networks:
+  tegraseed:
+  traefik-net:
+    external: true
+
+volumes:
+  postgres_data:
