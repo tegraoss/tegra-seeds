@@ -16,6 +16,7 @@ services:
     ports:
       - "3000:3000"
       - "5859:5859"
+    restart: always
     volumes:
       - .:/src
     links:

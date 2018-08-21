@@ -1,7 +1,7 @@
 version: '3.6'
 services:
 
-  picking-api:
+  tegraseed-api:
     image: tegra/internal:tegra-seed-api
     environment:
       - NODE_ENV=development

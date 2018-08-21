@@ -4,7 +4,7 @@ services:
   web:
     container_name: tegra-seed-api
     tty: true
-    build: docker/dev
+    build: ./
     environment:
       - NODE_ENV=development
       - NODE_PORT=3000
