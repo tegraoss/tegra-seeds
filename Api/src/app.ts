@@ -16,7 +16,7 @@ import { userRouter } from "./router/user-router";
 //import { controllers } from "./app/controllers";
 
 // DATABASE
-db.connect();
+db.connectAndMigrate();
 
 // INITIALIZE SERVER
 const app = express();
