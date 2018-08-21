@@ -5,7 +5,7 @@ exports.up = function (knex, Promise) {
     t.string('email').notNullable().uni;
     t.string('password').notNullable();
     t.string('name');
-    t.number('age');
+    t.integer('age');
     t.string('city');
     t.timestamps(false, true);
     t.unique('email');
